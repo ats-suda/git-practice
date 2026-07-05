@@ -159,7 +159,15 @@ echo "はじめてのGit" > memo.txt
 git status
 ```
 
-変更されたファイルの一覧が出る。困ったら何度でも打っていい「今どうなってる？」ボタン。
+変更されたファイルの一覧が出る。困ったら何度でも打っていい「今どうなってる？」ボタン。「やり残し（＝まだコミット／pushしていない変更）がないか」を確認するのにも使う。
+
+**読み方の目安:**
+
+- **赤いファイル名** … まだ `add` していない変更（`Changes not staged` / `Untracked files`）。
+- **緑のファイル名** … `add` 済みだが、まだ `commit` していない（`Changes to be committed`）。
+- **`nothing to commit, working tree clean`** … 残作業なし。全部コミット済みのきれいな状態。
+- **`Your branch is ahead of 'origin/main' by N commits`** … コミットは済んだが**まだ push していない**。`git push` が必要。
+- **`Your branch is up to date with 'origin/main'`** … GitHubとも同期済み（push漏れもなし）。
 
 ### ⑤ セーブの準備（ステージングという）
 
@@ -477,8 +485,10 @@ git config --global user.email "ユーザー名@users.noreply.github.com"
   改行の書き方をWindows式（CRLF）にそろえるよ、というただの**お知らせ**。ファイルは壊れないし、そのまま次に進んでOK。毎回出るのが気になるなら一度だけ `git config --global core.autocrlf true` を打つと出なくなる。
 - **`nothing to commit, working tree clean`**（`git commit` や `git status` のとき）
   「保存すべき変更が残っていない＝全部保存済み」という**良い状態**。もしファイルを編集したのにこれが出たら、エディタで**上書き保存（Ctrl+S）できていない**可能性。保存してから `git add .` をやり直す。
-- **`Your branch is up to date with 'origin/main'.`**
-  自分のPCとGitHubが同じ状態にそろっている、という意味。ズレなし＝理想的。
+- **`Your branch is up to date with 'origin/main'.`**（`git status` のとき）
+  自分のPCとGitHubが同じ状態にそろっている、という意味。ズレなし＝理想的（push漏れもなし）。
+- **`Your branch is ahead of 'origin/main' by N commits`**（`git status` のとき）
+  コミットは済んでいるが**まだ push していない**状態。`git push` すればGitHubに反映される。「やり残しがないか」の確認に便利。
 - **`(HEAD -> main, origin/main)`**（`git log` のとき）
   現在地・ローカルのmain・GitHubのmainが全部同じコミットを指している＝完全に同期できている印。
 - **`remote origin already exists`**（`git remote add` のとき）
